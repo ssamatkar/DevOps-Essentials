@@ -735,6 +735,26 @@ In this lab, you will set up a Docker container as a Jenkins slave, build a Dock
 
 ![image](https://github.com/janjiralakirankumar/DevOpsEssentials/assets/137407373/9139c0b6-2571-4606-84d0-22dac79d479e)
 
+### Task-0: Configuring Key pair.
+* SSH into docker-server
+* Change to the root user
+```
+sudo su
+```
+* Generate a key-pair
+```
+ssh-keygen
+```
+* Add the public key to the authorized_keys
+```
+cat /root/.ssh/id_rsa.pub
+```
+* Copy the contents of the file and paste in authorized_keys
+```
+vi /root/.ssh/authorized-keys
+```
+* Save the file using `ESCAPE+:wq!`
+
 ### Task-1: Configuring Docker Machine as Jenkins Slave.
 
 1. Go to **Jenkin's home page** and click on the **Manage Jenkins** and **Nodes**.
@@ -747,17 +767,17 @@ In this lab, you will set up a Docker container as a Jenkins slave, build a Dock
 * Launch method to be set as **"launch agents via SSH"**.
 * In the host section, give the **Public IP of the Docker instance**.
 * For Credentials for this Docker node, click on the dropdown button named **Add** and then click on **Jenkins**;
-* Then in the next window, in kind select **SSH username with private key** (give username as ubuntu),
+* Then in the next window, in kind select **SSH username with private key** (give username as root),
 * In **Private Key** Select **Enter directly** then Copy-Paste the Private Key and then click on **Add** .
 
 **Note:**
 To get the private key, Go to your **CICD-anchored EC2 machine** and run below command.
 ```
-cd ~/.ssh
+cd /root/.ssh
 cat id_rsa
 ```
 * Copy the entire content, including the **first and last lines**. Paste it into the space provided for the **private key** then click on **Add**.
-* Now, In SSH Credentials, choose the newly created **Ubuntu** credentials.
+* Now, In SSH Credentials, choose the newly created **root** credentials.
 * Host Key Verification Strategy Select as **"Non Verifying Verification Strategy"** and **Save** it.
 * Click on the **Add** button.
 * it's done.
@@ -767,7 +787,7 @@ cat id_rsa
 
 #### Now In CLI, SSH into your Docker Host and Perform the below steps to create a "Dockerfile" in /home/ubuntu directory.
 ```
-cd ~
+cd /home/ubuntu
 ```
 ```
 vi Dockerfile
@@ -809,26 +829,41 @@ tab.
 #### Note: You may replace 'yourname' with your actual first name (lines 3 and 5).
 
 ```
-cd ~
-cp -f /home/ubuntu/workspace/hello-world/target/hello-world-war-1.0.0.war .
-sudo docker container rm -f yourname-helloworld-container
-sudo docker build -t helloworld-image .
-sudo docker run -d -p 8080:8080 --name yourname-helloworld-container helloworld-image
+#!/bin/bash
+
+# Navigate to the Jenkins workspace
+cd /home/ubuntu/workspace/hello-world/
+
+# Copy the WAR file to the root directory
+cp -f target/hello-world-war-1.0.0.war .
+
+# Stop and remove the existing Docker container (if it exists)
+sudo docker stop helloworld-container || true
+sudo docker rm helloworld-container || true
+
+# Build the Docker image using the Dockerfile in the /home/ubuntu directory
+sudo docker build -t helloworld-image -f /home/ubuntu/Dockerfile .
+
+# Run the Docker container
+sudo docker run -d -p 8080:8080 --name helloworld-container helloworld-image
+
 ```
 ---------------------------------------------------------------------
 #### Explanatory Notes of the above Commands:
 
 The commands you provided are part of the Jenkins job's post-build steps, and they are responsible for building a Docker image and running a Docker container for your Java web application. Here's a breakdown of what each command does:
 
-1. `cd ~`: Change the working directory to the user's home directory.
+1. `cd /home/ubuntu/workspace/hello-world/`: Change the working directory to the Jenkin's workspace
 
-2. `cp -f /home/ubuntu/workspace/hello-world/target/hello-world-war-1.0.0.war .`: Copy the WAR file (presumably the artifact of your Java web application) from the Jenkins workspace to the current directory (`~`), where you'll perform the Docker build.
+2. `cp -f target/hello-world-war-1.0.0.war .`: Copy the WAR file (presumably the artifact of your Java web application) from the Jenkins workspace to the root directory (`~`), where you'll perform the Docker build.
 
-3. `sudo docker container rm -f yourname-helloworld-container`: Remove any existing Docker container with the name "yourname-helloworld-container" forcefully if it exists. You should replace "yourname" with your actual first name.
+3.`sudo docker stop helloworld-container || true`:  Stop any existing Docker container with the name "helloworld-container" forcefully if it exists. 
 
-4. `sudo docker build -t helloworld-image .`: Build a Docker image with the tag "helloworld-image" based on the Dockerfile located in the current directory (`.`). The Dockerfile you created earlier specifies how the image should be built.
+4. `sudo docker rm helloworld-container || true`: Remove any existing Docker container with the name "helloworld-container" forcefully if it exists. 
 
-5. `sudo docker run -d -p 8080:8080 --name yourname-helloworld-container helloworld-image`: Run a Docker container named "yourname-helloworld-container" from the "helloworld-image" image. This container will be detached (`-d`) and will map port 8080 on the host to port 8080 inside the container. You should replace "yourname" with your actual first name.
+5. `sudo docker build -t helloworld-image -f /home/ubuntu/Dockerfile .`: Build a Docker image with the tag "helloworld-image" based on the Dockerfile located in the current directory (`.`). The Dockerfile you created earlier specifies how the image should be built.
+
+6. `sudo docker run -d -p 8080:8080 --name helloworld-container helloworld-image`: Run a Docker container named "helloworld-container" from the "helloworld-image" image. This container will be detached (`-d`) and will map port 8080 on the host to port 8080 inside the container.
 
 After running these commands, your Java web application should be deployed inside a Docker container, and it will be accessible on port 8080 of your Docker host.
 
