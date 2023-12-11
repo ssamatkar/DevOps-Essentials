@@ -771,7 +771,7 @@ vi /root/.ssh/authorized-keys
 * In **Private Key** Select **Enter directly** then Copy-Paste the Private Key and then click on **Add** .
 
 **Note:**
-To get the private key, Go to your **CICD-anchored EC2 machine** and run below command.
+To get the private key, Go to your **Docker-server** and run below command.
 ```
 cd /root/.ssh
 cat id_rsa
