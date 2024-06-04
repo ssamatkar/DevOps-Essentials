@@ -751,7 +751,7 @@ cat /root/.ssh/id_rsa.pub
 ```
 * Copy the contents of the file and paste in authorized_keys
 ```
-vi /root/.ssh/authorized-keys
+vi /root/.ssh/authorized_keys
 ```
 * Save the file using `ESCAPE+:wq!`
 
