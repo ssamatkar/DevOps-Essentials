@@ -283,7 +283,7 @@ mkdir ansible && cd ansible
 ```
 #### Now, Download the playbook, which will deploy packages onto the `Docker-server` and `Jenkins-Server.`
 ```
-wget https://devops-e-e.s3.ap-south-1.amazonaws.com/DevOpsSetup.yml
+wget https://s3.ap-south-1.amazonaws.com/files.cloudthat.training/devops/devops-essentials/DevOpsSetup1.yml
 ```
 #### Run the above playbook to deploy the packages
 ```
@@ -341,7 +341,7 @@ sudo apt install git -y
 ```
 Download the **Java Code** that we are going to use in the CICD pipeline.
 ```
-wget https://devops-e-e.s3.ap-south-1.amazonaws.com/hello-world-master.zip
+wget https://s3.ap-south-1.amazonaws.com/files.cloudthat.training/devops/devops-essentials/hello-world-master.zip
 ```
 ```
 unzip hello-world-master.zip
