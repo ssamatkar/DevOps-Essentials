@@ -287,7 +287,7 @@ wget https://s3.ap-south-1.amazonaws.com/files.cloudthat.training/devops/devops-
 ```
 #### Run the above playbook to deploy the packages
 ```
-ansible-playbook DevOpsSetup.yml
+ansible-playbook DevOpsSetup1.yml
 ```
 #### At the end of this step, the `Docker-Server` and `Jenkins-Server` will be ready for performing further Labs
 
