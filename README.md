@@ -644,6 +644,21 @@ sudo service tomcat9 status
 ```
 **To exit**, press **ctrl+c**
 
+If any error is present asking for the value of JAVA_HOME
+```
+vi /etc/default/tomcat9
+```
+add the following line to the end of the file
+```
+JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
+```
+Now restart the system for the changes to take effect
+```
+sudo service tomcat9 restart
+```
+```
+sudo service tomcat9 status
+```
 * Once the Tomcat service restart is successful, go to your web browser and enter **Jenkins Server's Public IP address** followed by **9999** port.
 
 (Example: **http://< Jenkins Public IP >:9999**     or     **http://184.72.112.155:9999**)
