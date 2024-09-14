@@ -635,6 +635,13 @@ cat /etc/tomcat9/server.xml
 ```
 sudo chmod 766 /etc/tomcat9/server.xml
 ```
+```
+sudo vi /etc/default/tomcat9
+```
+Paste the path of jdk inside the file
+```
+JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+```
 Now restart the system for the changes to take effect
 ```
 sudo service tomcat9 restart
