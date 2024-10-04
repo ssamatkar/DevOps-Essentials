@@ -645,37 +645,7 @@ The objective of this lab is to configure Jenkins to build and deploy applicatio
 ---------------------------------------------------------------------
 ### Task-1: Configure Jenkins Server:
 
-Initially, Copy the **private key** from **Anchor Server** to the **Jenkins Server** & **Docker Server**. so, that we can SSH from **Jenkins Server** to **Docker Server** and viseversa.
-```
-cd ~
-```
-```
-ansible jenkins-server -m copy -a "src=/home/ubuntu/.ssh/id_rsa dest=/home/ubuntu/.ssh/id_rsa" -b
-```
 
-Here's a breakdown of the command:
-
-- `ansible`: The Ansible command-line tool.
-- `jenkins-server`: The target machine specified in your inventory file.
-- `-m copy`: Specifies the Ansible module to use, in this case, the `copy` module.
-- `-a "src=/home/ubuntu/.ssh/id_rsa dest=/home/ubuntu/.ssh/id_rsa"`: Specifies the arguments for the module, indicating the source and destination paths for the file copy.
-- `-b`: Run the Ansible command with elevated privileges.
-
-```
-ansible docker-server -m copy -a "src=/home/ubuntu/.ssh/id_rsa dest=/home/ubuntu/.ssh/id_rsa" -b
-```
-Here's a breakdown of the command:
-
-- `ansible`: The Ansible command-line tool.
-- `docker-server`: The target machine specified in your inventory file.
-- `-m copy`: Specifies the Ansible module to use, in this case, the `copy` module.
-- `-a "src=/home/ubuntu/.ssh/id_rsa dest=/home/ubuntu/.ssh/id_rsa"`: Specifies the arguments for the module, indicating the source and destination paths for the file copy.
-- `-b`: Run the Ansible command with elevated privileges.
-
-Using Jenkin's `Public IP` SSH into the **Jenkins Server** from the Anchor Server.
-```
-ssh ubuntu@xx.xx.xx.xx
-```
 Get the **Initial Password** for Jenkins from the below path.
 ```
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
