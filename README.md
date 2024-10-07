@@ -192,7 +192,7 @@ variable  "sg_id" {
 
 # Choose a free tier Ubuntu AMI. You can use below. 
 variable "ami_id" {
-    default = "ami-04505e74c0741db8d" # us-east-1; Ubuntu
+    default = "ami-0866a3c8686eaeeba" # us-east-1; Ubuntu
 }
 
 # We are only using t2.micro for this lab
