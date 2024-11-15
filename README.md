@@ -696,7 +696,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 sudo apt update
 ```
 ```
-sudo apt install tomcat9 tomcat9-admin -y
+sudo apt install tomcat10 tomcat10-admin -y
 ```
 ```
 ss -ltn
