@@ -1195,6 +1195,9 @@ Here's a breakdown of the format:
 For example, to set the date to November 22, 2023, 15:30:00, you would run:
 
 ```bash
+
+
+# LinkedIn Profile: https://www.linkedin.com/in/sruti-vhannure/
 sudo date 112215302023.00
 ```
 
