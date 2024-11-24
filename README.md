@@ -1204,3 +1204,7 @@ sudo date 112215302023.00
 Make sure to replace the values with the desired date and time components.
 
 After executing the `date` command, the system date and time will be updated accordingly.
+
+https://spacelift.io/blog/kubernetes-cheat-sheet
+https://kubernetes.io/pt-br/docs/reference/kubectl/cheatsheet/
+https://kodekloud.com/k8s-commands-cheatsheet
