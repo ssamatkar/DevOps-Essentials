@@ -21,7 +21,7 @@ The objective of this lab is to set up two AWS EC2 instances, one for Jenkins an
 
 * **Region:** North Virginia (us-east-1).
 * **Use tag Name:** `CICDLab-YourName`
-* **AMI Type and OS Version:** `Ubuntu 22.04 LTS`
+* **AMI Type and OS Version:** `Ubuntu 24.04 LTS`
 * **Instance type:** `t2.micro`
 * Create a new Keypair with the Name `CICDLab-Keypair-YourName`
 * In security groups, include ports `22 (SSH)` and `80 (HTTP)` (Add remaining ports later)
@@ -44,11 +44,11 @@ sudo apt update
 sudo apt install wget unzip -y
 ```
 ```
-wget https://releases.hashicorp.com/terraform/1.9.5/terraform_1.9.5_linux_amd64.zip
+wget https://releases.hashicorp.com/terraform/1.10.5/terraform_1.10.5_linux_amd64.zip
 ```
 View the [Terraform's Latest Versions](https://developer.hashicorp.com/terraform/downloads)
 ```
-unzip terraform_1.9.5_linux_amd64.zip
+unzip terraform_1.10.5_linux_amd64.zip
 ls
 ```
 ```
@@ -59,7 +59,7 @@ ls
 terraform -v
 ```
 ```
-rm terraform_1.9.5_linux_amd64.zip
+rm terraform_1.10.5_linux_amd64.zip
 ```
 ---------------------------------------------------------------------
 ### Task-2: Install Python 3, pip, AWS CLI, and Ansible
